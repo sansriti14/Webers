@@ -1,52 +1,93 @@
 from django.http.response import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
+from .models import Customer, Shopkeeper
 
 from home.models import Shopkeeper
+
 
 # Create your views here.
 
 
-def index(request):
-    return render(request, "index.html")
+def shopHome(request):
+    return render(request, "shopHome.html")
 
 
-def shopkeeperSignup(request):
-    if request.method == "POST":
-        name = request.POST['name']
-        email = request.POST['email']
-        password = request.POST['password']
-        phone = request.POST['phone']
-        shop = request.POST['shop']
-        if len(request.FILES) != 0:
-            image = request.FILES['image']
-        user = User.objects.create_user(name, email, password)
-        shopkeeper = Shopkeeper(name=name, shop=shop,
-                                email=email, phone=phone, image=image)
-        shopkeeper.save()
+def customerSignUp(request):
+    if request.method == 'POST':
+        name = request.POST['fullName']
+        email = request.POST['signEmail']
+        number = request.POST['phoneNum']
+        address = request.POST['residentialAddress']
+        password = request.POST['signPassword']
+        confirm_password = request.POST['cSignPassword']
 
-    return render(request, "shopkeeperSignup.html")
+        if len(name) < 3 or len(number) < 10:
+            # Message
+            return redirect('ShopHome')
+        if password != confirm_password:
+            # Message
+            return redirect('ShopHome')
+
+        customer = Customer.objects.create(name=name, email=email, contactNum=number, deliveryAddress=address,
+                                           password=password)
+        # Message
+        return redirect('ShopHome')
+
+
+def shopkeeperSignUp(request):
+    if request.method == 'POST':
+        name = request.POST['fullName']
+        email = request.POST['signEmail']
+        number = request.POST['phoneNum']
+        address = request.POST['residentialAddress']
+        shop_name = request.POST['shopName']
+        shop_address = request.POST['shopAddress']
+        password = request.POST['signPassword']
+        confirm_password = request.POST['cSignPassword']
+
+        if len(name) < 3 or len(number) < 10:
+            # Message
+            return redirect('ShopHome')
+        if password != confirm_password:
+            # Message
+            return redirect('ShopHome')
+
+        shopkeeper = Shopkeeper.objects.create(name=name, email=email, contactNum=number, resAddress=address,
+                                               shopName=shop_name, shopAddress=shop_address, password=password)
+        # Message
+        return redirect('ShopHome')
 
 
 def shopkeeperLogin(request):
     if request.method == "POST":
-        name = request.POST['name']
-        password = request.POST['password']
-        user = authenticate(username=name, password=password)
-        if user is not None:
-            login(request, user)
-            return HttpResponseRedirect("/shopkeeperHome")
-        else:
-            return HttpResponseRedirect("/shopkeeperLogin")
+        email = request.POST['linEmailId']
+        password = request.POST['linPassword']
 
-    return render(request, "shopkeeperLogin.html")
+        shopkeeper = Shopkeeper.objects.get(email=email)
+        if shopkeeper.password == password:
+            shopkeeper_id = shopkeeper.id
+            return redirect('shopkeeperHome')
+
+
+def customerLogin(request):
+    if request.method == "POST":
+        email = request.POST['linEmailId']
+        password = request.POST['linPassword']
+
+        customer = Customer.objects.get(email=email)
+        if customer.password == password:
+            shopkeeper_id = customer.id
+            return redirect('customerHome')
 
 
 def shopkeeperHome(request):
-    if request.user.is_anonymous:
-        return HttpResponseRedirect("/shopkeeperLogin")
     return render(request, "shopkeeperHome.html")
+
+
+def customerHome(request):
+    return render(request, "customerHome.html")
 
 
 def shopkeeperLogout(request):
