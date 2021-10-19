@@ -1,6 +1,7 @@
 from django.contrib import admin
-
-from home.models import Shopkeeper
+from .models import *
 
 # Register your models here.
+
 admin.site.register(Shopkeeper)
+admin.site.register(Customer)
