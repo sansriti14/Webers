@@ -1,5 +1,41 @@
 {% extends 'base.html' %} {% block content %}
 
-<h1>Welcome</h1>
+<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
+    aria-controls="offcanvasRight">
+    Add items
+</button>
 
-{% endblock content %}
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+        <h5 id="offcanvasRightLabel">Add items to your shop</h5>
+    </div>
+    <div class="offcanvas-body">
+        <form action="/addItems" method="post">
+            {%csrf_token%}
+            <div class="mb-3">
+                <label for="item" class="form-label">Item name</label>
+                <input type="text" class="form-control" id="item" name="item" />
+            </div>
+            <div class="mb-3">
+                <label for="quantity" class="form-label">Quantity</label>
+                <input type="number" class="form-control" id="quantity" name="quantity" />
+            </div>
+            <div class="mb-3">
+                <label for="price" class="form-label">Price</label>
+                <input type="number" class="form-control" id="price" name="price" />
+            </div>
+            <button type="submit" type="button" class="btn btn-primary">
+                Submit
+            </button>
+        </form>
+    </div>
+</div>
+
+<a href="/receivedRequests" class="btn btn-primary">Requests</a>
+
+<a href="/returnRequests" class="btn btn-primary">Return requests</a>
+
+<a href="/records" class="btn btn-primary">Records</a>
+
+ {% endblock content %}
+

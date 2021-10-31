@@ -1,0 +1,34 @@
+{% extends 'base.html' %} {% block content %} {% for re in res %}
+<h6>Item: {{re.item}}</h6>
+<h6>Shop: {{re.shop}}</h6>
+<p>Shopkeeper: {{re.shopkeeper}}</p>
+<p>Quantity: {{re.quantity}}</p>
+<p>Price: {{re.price}}</p>
+<p>Date: {{re.date}}</p>
+<a href="" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Return</a>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Reason for return</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/{{re.id}}/returnOrder" method="post">
+                    <div class="mb-3">
+                        <label for=" reason" class="form-label">Reason</label>
+                        <textarea class="form-control" style="border: 1px solid black; border-radius: 1px;" id="reason"
+                            name="reason"></textarea>
+                    </div>
+                    {% csrf_token %}
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Send</button>
+            </div>
+        </div>
+    </div>
+</div>
+{%empty%}
+    <h2>Nothing to show</h2>
+{% endfor %} {% endblock content %}

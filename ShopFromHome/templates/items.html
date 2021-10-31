@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    {% for item in items %}
+    
+        <h6>{{item.item}}</h6>
+        <p>{{item.quantity}}</p>
+        <p>{{item.price}}</p>
+        <a href="" class="btn btn-primary">Buy</a>
+        <a href="/{{shopId}}/{{item.id}}/itemReviews" class="btn btn-primary">Reviews</a>
+        <form action="/{{shopId}}/{{item.id}}/submitReviews" method="post">
+            <div class="mb-3"">
+                <label for=" comment" class="form-label">Comment</label>
+                <textarea class="form-control" style="width: 500px; border: 1px solid black; border-radius: 1px;" id="comment"
+                    name="comment"></textarea>
+            </div>
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    {%empty%}
+        <h2>Nothing to show</h2>
+    {% endfor %}
+{% endblock content %}
+
+
+

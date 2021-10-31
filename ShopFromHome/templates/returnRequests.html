@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    
+        {% for re in res %}
+        
+            <h6>Customer: {{re.name}}</h6>
+            <h6>Item: {{re.item}}</h6>
+            <p>Quantity: {{re.quantity}}</p>
+            <p>Price: {{re.price}}</p>
+            <p>Reason for return: {{re.reason}}</p>
+            <a href="{{re.id}}/acceptReturn" class="btn btn-primary">Accept return</a>
+        {%empty%}
+             <h2>Nothing to show</h2>
+        {% endfor %}
+
+
+    
+
+{% endblock content %}
+
+

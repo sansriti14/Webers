@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    {% for re in res %}
+    
+        <h6>{{re.name}}</h6>
+        <p>{{re.comment}}</p>
+    {%empty%}
+        <h2>Nothing to show</h2>
+    {% endfor %}
+    
+{% endblock content %}
+
+
+

@@ -1,0 +1,104 @@
+{% extends 'base.html' %} {% block content %}
+
+<button
+  class="btn btn-primary"
+  type="button"
+  data-bs-toggle="offcanvas"
+  data-bs-target="#offcanvasRight"
+  aria-controls="offcanvasRight"
+>
+  Broadcast request
+</button>
+
+<div
+  class="offcanvas offcanvas-end"
+  tabindex="-1"
+  id="offcanvasRight"
+  aria-labelledby="offcanvasRightLabel"
+>
+  <div class="offcanvas-header">
+    <h5 id="offcanvasRightLabel">Broadcast a request</h5>
+  </div>
+  <div class="offcanvas-body">
+    <form action="/broadcastRequest" method="post">
+      {%csrf_token%}
+      <div class="mb-3">
+        <label for="item" class="form-label">Item name</label>
+        <input type="text" class="form-control" id="item" name="item" />
+      </div>
+      <div class="mb-3">
+        <label for="quantity" class="form-label">Quantity</label>
+        <input
+          type="number"
+          class="form-control"
+          id="quantity"
+          name="quantity"
+        />
+      </div>
+      <div class="form-check mb-3">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="orderType"
+          value="manual"
+          id="flexRadioDefault1"
+        />
+        <label class="form-check-label" for="flexRadioDefault1">
+          Manual order
+        </label>
+      </div>
+      <div class="form-check mb-3">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="orderType"
+          value="automatic"
+          id="flexRadioDefault2"
+          checked
+        />
+        <label class="form-check-label" for="flexRadioDefault2">
+          Automatic order
+        </label>
+      </div>
+
+      <button type="submit" type="button" class="btn btn-primary">
+        Submit
+      </button>
+    </form>
+  </div>
+</div>
+
+<div class="mb-3">
+  <a href="/receivedResponses" class="btn btn-primary">Received responses</a>
+</div>
+
+<div class="mb-3">
+  <a href="/pastOrders" class="btn btn-primary">Past orders</a>
+</div>
+
+<div class="mb-3">
+  <a href="/unavailable" class="btn btn-primary">Unavailable items</a>
+</div>
+
+{% for shop in shops %}
+<img
+  src="{{shop.image.url}}"
+  alt="{{shop.name}}"
+  style="height: 300px; width: 300px"
+/>
+<h5>{{shop.shop}}</h5>
+<h6>{{shop.name}}</h6>
+<p>{{shop.phone}}</p>
+<a href="{{shop.id}}/enterShop" class="btn btn-primary">Enter shop</a>
+<a href="/{{shop.id}}/shopComments" class="btn btn-primary">Comments</a>
+<form action="/{{shop.id}}/submitComments" method="post">
+  <div class="mb-3"">
+        <label for=" comment" class="form-label">Comment</label>
+    <textarea class="form-control" style="width: 500px; border: 1px solid black; border-radius: 1px;" id="comment"
+      name="comment"></textarea>
+  </div>
+  {% csrf_token %}
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+{% endfor %} {% endblock content %}

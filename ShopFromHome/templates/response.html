@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% for response in responses %}
+{% for re in response|slice:":1" %}
+<h6>Response for request of {{re.req.item}}</h6>
+<h6>Type: {{re.req.type}}</h6>
+
+{% endfor %}
+{% for res in response %}
+<p>Shop: {{res.shop}}</p>
+<p>Shopkeeper: {{res.name}}</p>
+<p>Price: {{res.price}}</p>
+<a href="/{{res.id}}/{{res.req.id}}/acceptResponse" class="btn btn-primary">Accept</a>
+{% endfor %}
+ 
+{% endfor %}
+{% endblock content %}

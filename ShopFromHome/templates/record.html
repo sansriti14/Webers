@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <form class="d-flex" style="width: fit-content;" method="post" action="/searchRecords">
+        {%csrf_token%}
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+        
+    </form>
+
+    {% for re in res %}
+    
+        <h6>Customer: {{re.customer}}</h6>
+        <p>Item: {{re.item}}</p>
+        <p>Quantity: {{re.quantity}}</p>
+        <p>Price: {{re.price}}</p>
+        <p>Date: {{re.date}}</p>
+    {%empty%}
+        <h2>Nothing to show</h2>
+    {% endfor %}
+
+{% endblock content %}
+
+
+

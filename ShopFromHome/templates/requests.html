@@ -1,0 +1,41 @@
+{% extends 'base.html' %} {% block content %}
+
+{% for i in list %}
+
+    <h6>{{i.name}}</h6>
+    <p>{{i.item}}</p>
+    <p>{{i.quantity}}</p>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Respond
+    </button>
+    
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Confirm price</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                <form action="/{{i.id}}/sendResponse" method="post">
+                    <div class="mb-3">
+                        <label for="price" class="form-label">Price</label>
+                        <input type="number" value={{i.price}} class="form-control" id="price" name="price" />
+                    </div>
+                    {% csrf_token %}
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {%empty%}
+        <h2>Nothing to show</h2>
+
+{% endfor %}
+
+
+ {% endblock content %}
