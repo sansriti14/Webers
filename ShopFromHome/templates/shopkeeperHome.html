@@ -1,34 +1,34 @@
 {% extends 'base.html' %} {% block content %}
 
 <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
-    aria-controls="offcanvasRight">
-    Add items
+  aria-controls="offcanvasRight">
+  Add items
 </button>
 
 <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-    <div class="offcanvas-header">
-        <h5 id="offcanvasRightLabel">Add items to your shop</h5>
-    </div>
-    <div class="offcanvas-body">
-        <form action="/addItems" method="post">
-            {%csrf_token%}
-            <div class="mb-3">
-                <label for="item" class="form-label">Item name</label>
-                <input type="text" class="form-control" id="item" name="item" />
-            </div>
-            <div class="mb-3">
-                <label for="quantity" class="form-label">Quantity</label>
-                <input type="number" class="form-control" id="quantity" name="quantity" />
-            </div>
-            <div class="mb-3">
-                <label for="price" class="form-label">Price</label>
-                <input type="number" class="form-control" id="price" name="price" />
-            </div>
-            <button type="submit" type="button" class="btn btn-primary">
-                Submit
-            </button>
-        </form>
-    </div>
+  <div class="offcanvas-header">
+    <h5 id="offcanvasRightLabel">Add items to your shop</h5>
+  </div>
+  <div class="offcanvas-body">
+    <form action="/addItems" method="post">
+      {%csrf_token%}
+      <div class="mb-3">
+        <label for="item" class="form-label">Item name</label>
+        <input type="text" class="form-control" id="item" name="item" />
+      </div>
+      <div class="mb-3">
+        <label for="quantity" class="form-label">Quantity</label>
+        <input type="number" class="form-control" id="quantity" name="quantity" />
+      </div>
+      <div class="mb-3">
+        <label for="price" class="form-label">Price</label>
+        <input type="number" class="form-control" id="price" name="price" />
+      </div>
+      <button type="submit" type="button" class="btn btn-primary">
+        Submit
+      </button>
+    </form>
+  </div>
 </div>
 
 <a href="/receivedRequests" class="btn btn-primary">Requests</a>
@@ -37,5 +37,102 @@
 
 <a href="/records" class="btn btn-primary">Records</a>
 
- {% endblock content %}
+<!-- {% for re in res %}
 
+  <h5>Item: {{re.item}}</h5>
+  <p>Quantitiy: {{re.quantity}}</p>
+  <p>Price: {{re.price}}</p>
+{% endfor %} -->
+<div class="row row-cols-1 row-cols-md-5 g-4">
+  {% for re in res %}
+  <div class="col">
+    <div class="card h-100">
+      <!-- <img src="" class="card-img-top" alt="..." -->
+      <hr style="margin: 0px">
+      <div class="card-body" style="padding: 10px">
+        <h5 class="nameOfItem">{{ re.item }}</h5>
+        <p style="margin-bottom: 10px">Quantity : {{ re.quantity }}</p>
+        <p style="margin-bottom: 10px">Price : &#x20B9; {{ re.price }}</p>
+        <div>
+          <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasRight_{{ re.pk }}" aria-controls="offcanvasRight"
+            style="box-shadow: none; padding: 8px; float: left">Update
+          </button>
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+            data-bs-target="#staticBackdrop_{{ re.pk }}"
+            style="box-shadow: none; padding: 8px; float: right; background-color: rgb(72, 129, 91);">
+            Delete
+          </button>
+        </div>
+      {# Update OffCanvas From Here #}
+      <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight_{{ re.pk }}"
+        aria-labelledby="offcanvasRightLabel">
+        <div class="offcanvas-header" style="background-color: #e3f2fd">
+          <h5 id="offcanvasRightLabel">Update Item : {{ re.item }}</h5>
+          <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+          <form action="/updateItem" method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+              <input type="hidden" class="form-control" id="ItemId" name="ItemId" value={{ re.pk }}>
+            </div>
+            <div class="mb-3">
+              <label for="NewQty" class="form-label">Quantity</label>
+              <input type="number" class="form-control" id="NewQty" name="NewQty" placeholder="Enter new Quantity" value={{
+                re.quantity }}>
+            </div>
+            <div class="mb-3">
+              <label for="NewPrice" class="form-label">Price</label>
+              <input type="number" step="0.01" class="form-control" id="NewPrice" name="NewPrice"
+                placeholder="Enter new Price" value={{ re.price }}>
+            </div>
+            <div class="mb-3">
+              <label for="NewImage" class="form-label">Image Link</label>
+              <input type="url" class="form-control" id="NewImage" name="NewImage" placeholder="Give new Image Link"
+                value="https://www.blank.com/">
+            </div>
+            <button type="submit" class="btn btn-success" style="background-color: rgb(113, 113, 255); box-shadow: none">Save
+            </button>
+          </form>
+        </div>
+      </div>
+      
+      <!-- Delete Modal From Here -->
+      <div class="modal fade" id="staticBackdrop_{{ re.pk }}" data-bs-backdrop="static" data-bs-keyboard="false"
+        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header" style="background-color: #e3f2fd">
+              <h5 class="modal-title" id="staticBackdropLabel">Delete Item
+                :{{ re.item }} </h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form action="{{re.id}}/deleteItem" method="post">
+                {% csrf_token %}
+                <p>Do you want to delete Item : {{ re.item }} from your item list
+                  ?</p>
+                <input type="hidden" class="form-control" id="ItemId" name="ItemId" value={{ re.pk }}>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="box-shadow: none">
+                    No
+                  </button>
+                  <button type="submit" class="btn btn-success"
+                    style="background-color: rgb(113, 113, 255); box-shadow: none">
+                    Yes,
+                    I Confirm
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      </div>
+      </div>
+      {% endfor %}
+      </div>
+    
+{% endblock content %}

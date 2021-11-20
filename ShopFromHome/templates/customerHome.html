@@ -1,4 +1,4 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'customerBase.html' %} {% block content %}
 
 <button
   class="btn btn-primary"
@@ -80,7 +80,56 @@
   <a href="/unavailable" class="btn btn-primary">Unavailable items</a>
 </div>
 
-{% for shop in shops %}
+<div class="container" style="width: 80%; margin-top: 20px;">
+  <!-- Content here -->
+  {% if shops %}
+  {% for shop in shops %}
+  <div class="card mb-3" style="width: 100%;">
+    {% comment %} <form action="{% url " openShop" customer.pk %}" method="post"> {% endcomment %}
+      {% csrf_token %}
+      <input type="hidden" class="form-control" id="ShopId" name="ShopId" value={{ shop.pk }}>
+      <div class="row g-0">
+        <div class="col-md-4" style="width: 280px; height: 210px;">
+          <img src="{{ shop.image.url }}" class="img-fluid rounded-start" style="width: 280px; height: 210px;"
+            alt="...">
+        </div>
+        <div class="col-md-8">
+          <button type="submit" class="btn btn-success"
+            style="background-color: white; border: none; box-shadow: none; text-align: left">
+            <div class="card-body">
+              <h5 class="card-title" style="margin-bottom: 20px; color: black;">{{ shop.shop }}</h5>
+              <p class="card-text" style="margin-bottom: 10px; color: black;">Name of Shopkeeper
+                : {{ shop.name }}</p>
+              <p class="card-text" style="margin-bottom: 10px; color: black;">Email Address
+                : {{ shop.email }}</p>
+              <p class="card-text" style="margin-bottom: 10px; color: black;">Address of the Shop
+                : {{ shop.address }}</p>
+            </div>
+          </button>
+          <a href="{{shop.id}}/enterShop" class="btn btn-primary">Enter shop</a>
+<a href="/{{shop.id}}/shopComments" class="btn btn-primary">Comments</a>
+<form action="/{{shop.id}}/submitComments" method="post">
+  <div class="mb-3"">
+        <label for=" comment" class="form-label">Comment</label>
+    <textarea class="form-control" style="width: 500px; border: 1px solid black; border-radius: 1px;" id="comment"
+      name="comment"></textarea>
+  </div>
+  {% csrf_token %}
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+        </div>
+      </div>
+    </form>
+  </div>
+  {% endfor %}
+</div>
+{% else %}
+<h1>Sorry!!</h1>
+<h3>As of now, there are no shops listed here</h3>
+{% endif %}
+</div>
+
+<!-- {% for shop in shops %}
 <img
   src="{{shop.image.url}}"
   alt="{{shop.name}}"
@@ -101,4 +150,5 @@
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 
-{% endfor %} {% endblock content %}
+{% endfor %} -->
+ {% endblock content %}

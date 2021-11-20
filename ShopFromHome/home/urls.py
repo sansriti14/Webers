@@ -1,4 +1,3 @@
-from django.contrib import admin
 from django.urls import path
 from home import views
 
@@ -77,4 +76,20 @@ urlpatterns = [
     # For getting all reviews about a particular item
     path("<int:shopId>/<int:itemId>/itemReviews",
          views.itemReviews, name="itemReviews"),
+
+    # For customer signup
+    path("customerSignup", views.customerSignup, name="customerSignup"),
+
+    # For customer login
+    path("customerLogin", views.customerLogin, name="customerLogin"),
+
+    # For customer logout
+    path("customerLogout", views.customerLogout, name="customerLogout"),
+
+    #     path("<int:shopkeeper_id>/searchItem/",
+    #          views.searchItem, name="searchItem"),
+    path("updateItem",
+         views.updateItem, name="updateItem"),
+    path("<int:shopkeeper_id>/deleteItem",
+         views.deleteItem, name="deleteItem"),
 ]
