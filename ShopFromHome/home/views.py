@@ -437,3 +437,18 @@ def deleteItem(request, shopkeeper_id):
 #         else:
 #             response = "Invalid Quantity, Order Unsuccessful"
 #             return HttpResponse(response)
+
+def buyItem(request, shopId, itemId):
+    if request.method == "POST":
+        quantity = request.POST['quantity']
+        item = Items.objects.get(id=itemId)
+        shop = Shopkeeper.objects.get(id=shopId)
+        if(int(quantity) < item.quantity):
+            item.quantity -= int(quantity)
+            item.save()
+            order = PastOrders(name=request.user.username, shop=shop.shop, shopkeeper=shop.name,
+                               item=item.item, quantity=item.quantity, price=item.price, date=timezone.now)
+            # order.save()
+        else:
+            pass
+    return HttpResponseRedirect("/" + str(shopId) + "/enterShop")

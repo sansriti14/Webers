@@ -2,12 +2,12 @@
 
 {% block content %}
 
-    {% for item in items %}
+    {% comment %} {% for item in items %}
     
         <h6>{{item.item}}</h6>
         <p>{{item.quantity}}</p>
         <p>{{item.price}}</p>
-        <a href="" class="btn btn-primary">Buy</a>
+        <!-- <a href="/{{item.id}}/buyItem" class="btn btn-primary">Buy</a> -->
         <a href="/{{shopId}}/{{item.id}}/itemReviews" class="btn btn-primary">Reviews</a>
         <form action="/{{shopId}}/{{item.id}}/submitReviews" method="post">
             <div class="mb-3"">
@@ -20,7 +20,65 @@
         </form>
     {%empty%}
         <h2>Nothing to show</h2>
-    {% endfor %}
+    {% endfor %} {% endcomment %}
+
+    <div class="row row-cols-1 row-cols-md-5 g-4">
+  {% for item in items %}
+  <div class="col">
+    <div class="card h-100">
+      <!-- <img src="" class="card-img-top" alt="..." -->
+      <hr style="margin: 0px">
+      <div class="card-body" style="padding: 10px">
+        <h5 class="nameOfItem">{{ item.item }}</h5>
+        <p style="margin-bottom: 10px">Quantity : {{ item.quantity }}</p>
+        <p style="margin-bottom: 10px">Price : &#x20B9; {{ item.price }}</p>
+        <!-- <a href="/{{item.id}}/buyItem" class="btn btn-primary">Buy</a> -->
+        <div>
+            <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasRight_{{ item.pk }}" aria-controls="offcanvasRight"
+                style="box-shadow: none; padding: 8px; float: left">Buy
+            </button>
+        </div>
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight_{{ item.pk }}"
+            aria-labelledby="offcanvasRightLabel">
+            <div class="offcanvas-header" style="background-color: #e3f2fd">
+                <h5 id="offcanvasRightLabel">Order Item : {{ item.item }}</h5>
+                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <form action="/{{shopId}}/{{item.id}}/buyItem" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" class="form-control" id="ItemId" name="ItemId" value={{ item.pk }}>
+                    <input type="hidden" class="form-control" id="ShopId" name="ShopId" value={{ shopkeeper.pk }}>
+                    <div class="mb-3">
+                        <label for="Price" class="form-label">Price</label>
+                        <input type="number" disabled step="0.01" class="form-control" id="Price" name="price" value={{ item.price }}>
+                    </div>
+                    <div class="mb-3">
+                        <label for="Qty" class="form-label">Quantity</label>
+                        <input type="number" class="form-control" id="Qty" name="quantity" placeholder="Enter appropriate Quantity">
+                    </div>
+                    <button type="submit" class="btn btn-success"
+                        style="background-color: rgb(113, 113, 255); box-shadow: none">Buy
+                    </button>
+                </form>
+            </div>
+        </div>
+        <a href="/{{shopId}}/{{item.id}}/itemReviews" class="btn btn-primary">Reviews</a>
+        <form action="/{{shopId}}/{{item.id}}/submitReviews" method="post">
+            <div class="mb-3"">
+                        <label for=" comment" class="form-label">Comment</label>
+                <textarea class="form-control" style="width: fit-content; border: 1px solid black; border-radius: 1px;" id="comment"
+                    name="comment"></textarea>
+            </div>
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        </div>
+    </div>
+  </div>
+  {%endfor%}
+    </div>
 {% endblock content %}
 
 

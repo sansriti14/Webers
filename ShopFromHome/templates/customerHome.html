@@ -1,5 +1,5 @@
 {% extends 'customerBase.html' %} {% block content %}
-
+<div style="display: flex;">
 <button
   class="btn btn-primary"
   type="button"
@@ -68,6 +68,7 @@
   </div>
 </div>
 
+
 <div class="mb-3">
   <a href="/receivedResponses" class="btn btn-primary">Received responses</a>
 </div>
@@ -79,7 +80,7 @@
 <div class="mb-3">
   <a href="/unavailable" class="btn btn-primary">Unavailable items</a>
 </div>
-
+</div>
 <div class="container" style="width: 80%; margin-top: 20px;">
   <!-- Content here -->
   {% if shops %}
