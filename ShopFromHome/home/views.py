@@ -445,10 +445,13 @@ def buyItem(request, shopId, itemId):
         shop = Shopkeeper.objects.get(id=shopId)
         if(int(quantity) < item.quantity):
             item.quantity -= int(quantity)
-            item.save()
+            record = RecordForShopkeeper(
+                customer=request.user.username, shop=shop.shop, shopkeeper=shop.name, item=item.item, quantity=quantity, price=item.price, date=timezone.now())
+            record.save()
             order = PastOrders(name=request.user.username, shop=shop.shop, shopkeeper=shop.name,
-                               item=item.item, quantity=item.quantity, price=item.price, date=timezone.now)
-            # order.save()
+                               item=item.item, quantity=int(quantity), price=item.price, date=timezone.now())
+            order.save()
+            item.save()
         else:
             pass
     return HttpResponseRedirect("/" + str(shopId) + "/enterShop")
