@@ -70,8 +70,8 @@
         <p>Quantity: {{re.quantity}}</p>
         <p>Price: {{re.price}}</p>
         <p>Date: {{re.date}}</p> {% endcomment %}
-    {%empty%}
-        <h2>Nothing to show</h2>
+    {% comment %} {%empty%}
+        <h2>Nothing to show</h2> {% endcomment %}
     {% endfor %}
 
 {% endblock content %}
