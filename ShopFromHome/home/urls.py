@@ -92,4 +92,5 @@ urlpatterns = [
          views.updateItem, name="updateItem"),
     path("<int:shopkeeper_id>/deleteItem",
          views.deleteItem, name="deleteItem"),
+    path("<int:shopId>/<int:itemId>/buyItem", views.buyItem, name="buyItem"),
 ]
