@@ -1,20 +1,72 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    
-        {% for re in res %}
+    <style>
+      
+      .btn btn-primary btn-lg{
+        font-size: large;
+      }
+      table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    }
+
+    table{
+    margin-top: 120px;
+    width:max-content;
+    height: 150 px;
+    }
+    table{
+            border-collapse: collapse;
+            width: 90%;
+            position: center;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        th,td{
+            padding: 15px;
+            text-align: left;
+        }
+
+    </style>
+      <table class="table table-bordered border-primary">
         
+        <thead>
+          <tr>
+            <th scope="col">Name Of Customer</th>
+            <th scope="col">Item</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Price</th>
+            <th scope="col">Accept return</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for re in res %}
+          <tr>
+            <td>{{re.name}}</td>
+            <td>{{re.item}}</td>
+            <td>{{re.quantity}}</td>
+            <td>{{re.price}}</td>
+            <td><div id="ap"><a href="{{re.id}}/acceptReturn" class="btn btn-primary">Accept return</a></div></td>
+          </tr>
+        {% comment %} {% for re in res %}
+        
+
+
+
             <h6>Customer: {{re.name}}</h6>
             <h6>Item: {{re.item}}</h6>
             <p>Quantity: {{re.quantity}}</p>
             <p>Price: {{re.price}}</p>
-            <p>Reason for return: {{re.reason}}</p>
-            <a href="{{re.id}}/acceptReturn" class="btn btn-primary">Accept return</a>
+            {% comment %} <p>Reason for return: {{re.reason}}</p> {% endcomment %}
+            <a href="{{re.id}}/acceptReturn" class="btn btn-primary">Accept return</a> {% endcomment %}
         {%empty%}
              <h2>Nothing to show</h2>
         {% endfor %}
 
-
+        </tbody>
+      </table>
     
 
 {% endblock content %}
