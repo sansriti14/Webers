@@ -2,6 +2,7 @@ from django.http.response import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from home.models import Customer, HasResponded, Items, PastOrders, Requests, Responses, Shopkeeper, Comments, RecordForShopkeeper
 
@@ -43,6 +44,7 @@ def shopkeeperLogin(request):
     return render(request, "shopkeeperLogin.html")
 
 
+@login_required(login_url="/shopkeeperLogin")
 def shopkeeperHome(request):
     if request.user.is_anonymous:
         return HttpResponseRedirect("/shopkeeperLogin")
@@ -55,6 +57,7 @@ def shopkeeperLogout(request):
     return HttpResponseRedirect("/shopkeeperLogin")
 
 
+@login_required(login_url="/customerLogin")
 def customerHome(request):
     shops = Shopkeeper.objects.all()
     return render(request, "customerHome.html", {"shops": shops})

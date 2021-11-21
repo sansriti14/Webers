@@ -1,14 +1,70 @@
 {% extends 'base.html' %} {% block content %}
 
-{% for i in list %}
+{% comment %} {% for i in list %}
 
     <h6>{{i.name}}</h6>
     <p>{{i.item}}</p>
-    <p>{{i.quantity}}</p>
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    <p>{{i.quantity}}</p> {% endcomment %}
+
+
+    <style>
+      
+      .btn btn-primary btn-lg{
+        font-size: large;
+      }
+      table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    }
+
+    table{
+    margin-top: 120px;
+    width:max-content;
+    height: 150 px;
+    }
+    table{
+            border-collapse: collapse;
+            width: 90%;
+            position: center;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        th,td{
+            padding: 15px;
+            text-align: left;
+        }
+
+    </style>
+</head>
+<body>
+    
+      <table class="table table-bordered border-primary">
+        
+        <thead>
+          <tr>
+            <th scope="col">Name Of Customer</th>
+            <th scope="col">Item</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Respond</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for i in list %}
+          <tr>
+            <td>{{i.name}}</td>
+            <td>{{i.item}}</td>
+            <td>{{i.quantity}}</td>
+            <td><div id="ap"><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
         Respond
-    </button>
+    </button></div></td>
+          </tr>
+        
+    
+
+
+
+    <!-- Button trigger modal -->
     
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -36,6 +92,7 @@
         <h2>Nothing to show</h2>
 
 {% endfor %}
-
+</tbody>
+      </table>
 
  {% endblock content %}
