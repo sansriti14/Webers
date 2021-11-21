@@ -1,36 +1,108 @@
-{% extends 'customerBase.html' %} {% block content %}
+<!DOCTYPE html>
+<html lang="en">
 
-<h2 style="text-align: center">Sign up</h2>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    
+    
+    #io{
+      margin-top: 20px; ;
+      
+    }
+    ul.nav {
+    margin:0;
+    padding:1px;
+    list-style:none;
+    height:50px; line-height:50px;
+    background:#0d7963; /* you can change the backgorund color here. */
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:13px;
+}
+ul.nav li {
+    border-right:1px solid #189b80; /* you can change the border color matching to your background color */
+    float:left;
+}
+ul.nav a {
+    display:block;
+    padding:0 28px;
+    color:#ccece6;
+    text-decoration:none;
+}
+ul.nav a:hover,
+ul.nav li.current a {
+    background:#086754;
+}
+.mb-3{
+  margin:10px;
+}
+#ut{
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  font-size: larger;
+}
+.container-fluid my-4 shadow{
+  background-image: none;
+}
+    
+body{
+  background-image: url("https://images.unsplash.com/photo-1557821552-17105176677c?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTV8fHNob3BwaW5nfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.form-label{
+  font-size: medium;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
 
-<div
-  class="container-fluid my-4 shadow"
-  style="padding: 50px; width: fit-content; border: 1px solid gray"
->
-  <form action="/customerSignup" method="post" enctype="multipart/form-data">
-    <div class="mb-3">
-      <label for="name" class="form-label">Name</label>
-      <input type="text" class="form-control" id="name" name="name" />
-    </div>
-    <div class="mb-3">
-      <label for="email" class="form-label">Email address</label>
-      <input type="email" class="form-control" id="email" name="email" />
-    </div>
-    <div class="mb-3">
-      <label for="phone" class="form-label">Phone number</label>
-      <input type="text" class="form-control" id="phone" name="phone" />
-    </div>
-    <div class="mb-3">
-      <label for="password" class="form-label">Password</label>
-      <input
-        type="password"
-        class="form-control"
-        id="password"
-        name="password"
-      />
-    </div>
-    {% csrf_token %}
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
-</div>
+  </style>
+</head>
 
-{% endblock content %}
+<body>
+  <ul class="nav">
+    <li id="ut">Shopify</li>
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Login</a></li>
+    
+  </ul>
+  
+		
+	
+    
+    
+		
+
+
+
+  
+        <h2 id="io" style="text-align: center">Sign up</h2>
+
+        <div class="container-fluid my-4 shadow"
+          style="padding: 50px; margin-left: 600px;width: fit-content; border: 1px solid gray">
+          <form action="/customerSignup" method="post" enctype="multipart/form-data">
+            <div class="mb-3">
+              <label for="name" class="form-label">Name</label>
+              <input type="text" class="form-control" id="name" name="name" />
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email address</label>
+              <input type="email" class="form-control" id="email" name="email" />
+            </div>
+            <div class="mb-3">
+              <label for="phone" class="form-label">Phone number</label>
+              <input type="text" class="form-control" id="phone" name="phone" />
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input type="password" class="form-control" id="password" name="password" />
+            </div>
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+</body>
+
+</html>
