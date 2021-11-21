@@ -1,5 +1,89 @@
-{% extends 'customerBase.html' %} {% block content %}
-<div style="display: flex;">
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    
+    
+    #io{
+      margin-top: 20px; ;
+      
+    }
+    ul.nav {
+    margin:0;
+    padding:1px;
+    list-style:none;
+    height:50px; line-height:50px;
+    background:#0d7963; /* you can change the backgorund color here. */
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:13px;
+}
+ul.nav li {
+    border-right:1px solid #189b80; /* you can change the border color matching to your background color */
+    float:left;
+}
+ul.nav a {
+    display:block;
+    padding:0 28px;
+    color:#ccece6;
+    text-decoration:none;
+}
+ul.nav a:hover,
+ul.nav li.current a {
+    background:#086754;
+}
+.mb-3{
+  margin:10px;
+}
+#ut{
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  font-size: larger;
+}
+.container-fluid my-4 shadow{
+  background-image: none;
+}
+    
+
+.form-label{
+  font-size: medium;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+  </style>
+</head>
+
+<body>
+  <ul class="nav">
+    <li id="ut">Shopify</li>
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Logout</a></li>
+    <li>
+      <div class="mb-3">
+        <a href="/receivedResponses" class="btn btn-primary">Received responses</a>
+      </div></li>
+      
+      <li><div class="mb-3">
+        <a href="/pastOrders" class="btn btn-primary">Past orders</a>
+      </div></li>
+      <li>
+      <div class="mb-3">
+        <a href="/unavailable" class="btn btn-primary">Unavailable items</a>
+      </div>
+    </li>
+    
+  </ul>
+  
+
+
+
+
+
+
 <button
   class="btn btn-primary"
   type="button"
@@ -68,6 +152,10 @@
   </div>
 </div>
 
+<<<<<<< HEAD
+
+
+=======
 
 <div class="mb-3">
   <a href="/receivedResponses" class="btn btn-primary">Received responses</a>
@@ -81,6 +169,7 @@
   <a href="/unavailable" class="btn btn-primary">Unavailable items</a>
 </div>
 </div>
+>>>>>>> 72c40079ec9ce515fcb7a9e7e4ea8dc5db81a97b
 <div class="container" style="width: 80%; margin-top: 20px;">
   <!-- Content here -->
   {% if shops %}
@@ -130,6 +219,9 @@
 {% endif %}
 </div>
 
+</body>
+</html>
+
 <!-- {% for shop in shops %}
 <img
   src="{{shop.image.url}}"
@@ -152,4 +244,3 @@
 </form>
 
 {% endfor %} -->
- {% endblock content %}
