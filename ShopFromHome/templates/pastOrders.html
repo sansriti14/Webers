@@ -117,9 +117,9 @@ ul.nav li.current a {
             <td>{{re.quantity}}</td>
             <td>{{re.price}}</td>
             <td>{{re.date}}</td>
-            <td><div id="ap"><a href="" class="btn btn-danger">Return</a>
-</div></td>
-          </tr>
+            {% comment %} <td><div id="ap"><a href="/{{re.id}}/returnOrder" method="post" class="btn btn-danger">Return</a>
+</div></td> {% endcomment %}
+         
         
     
 
@@ -136,10 +136,10 @@ ul.nav li.current a {
 <p>Shopkeeper: {{re.shopkeeper}}</p>
 <p>Quantity: {{re.quantity}}</p>
 <p>Price: {{re.price}}</p>
-<p>Date: {{re.date}}</p>
-<a href="" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Return</a> {% endcomment %}
+<p>Date: {{re.date}}</p>{% endcomment %}
+<td><a href="" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Return</a> 
 <!-- Modal -->
-{% comment %} <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -160,7 +160,8 @@ ul.nav li.current a {
             </div>
         </div>
     </div>
-</div> {% endcomment %}
+</div> </td>
+ </tr>
 {% comment %} {%empty%}
     <h2>Nothing to show</h2> {% endcomment %}
 {% endfor %} 
