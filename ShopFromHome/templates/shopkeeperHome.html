@@ -1,4 +1,62 @@
-{% extends 'base.html' %} {% block content %}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+  integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
+<style>
+  #io {
+    margin-top: 20px;
+  }
+  ul.nav {
+    margin: 0;
+    padding: 1px;
+    list-style: none;
+    height: 50px;
+    line-height: 50px;
+    background: #0d7963; /* you can change the backgorund color here. */
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+  }
+  ul.nav li {
+    border-right: 1px solid #189b80; /* you can change the border color matching to your background color */
+    float: left;
+  }
+  ul.nav a {
+    display: block;
+    padding: 0 28px;
+    color: #ccece6;
+    text-decoration: none;
+  }
+  ul.nav a:hover,
+  ul.nav li.current a {
+    background: #086754;
+  }
+  .mb-3 {
+    margin: 10px;
+  }
+  #ut {
+    font-family: "Courier New", Courier, monospace;
+    font-weight: bold;
+    font-size: larger;
+  }
+  .container-fluid my-4 shadow {
+    background-image: none;
+  }
+</style>
+
+<body>
+  <ul class="nav">
+    <li id="ut">Shopify</li>
+    <li><a href="/shopkeeperHome">Home</a></li>
+    <li><a href="/shopkeeperLogout">Logout</a></li>
+    <li>
+      <a href="/receivedRequests">Requests</a>
+    </li>
+
+    <li>
+      <a href="/returnRequests">Return requests</a>
+    </li>
+    <li>
+      <a href="/records">Records</a>
+    </li>
+  </ul>
 
 <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
   aria-controls="offcanvasRight">
@@ -31,11 +89,6 @@
   </div>
 </div>
 
-<a href="/receivedRequests" class="btn btn-primary">Requests</a>
-
-<a href="/returnRequests" class="btn btn-primary">Return requests</a>
-
-<a href="/records" class="btn btn-primary">Records</a>
 
 <!-- {% for re in res %}
 
@@ -134,5 +187,6 @@
       </div>
       {% endfor %}
       </div>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     
-{% endblock content %}

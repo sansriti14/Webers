@@ -1,7 +1,5 @@
-{% extends 'base.html' %} {% block content %}
-
-
-
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
 <style>
       
       .btn btn-primary btn-lg{
@@ -30,9 +28,72 @@
             text-align: left;
         }
 
-    </style>
-</head>
+ 
+
+        #io{
+      margin-top: 20px; ;
+      
+    }
+    ul.nav {
+    margin:0;
+    padding:1px;
+    list-style:none;
+    height:50px; line-height:50px;
+    background:#0d7963; /* you can change the backgorund color here. */
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:13px;
+}
+ul.nav li {
+    border-right:1px solid #189b80; /* you can change the border color matching to your background color */
+    float:left;
+}
+ul.nav a {
+    display:block;
+    padding:0 28px;
+    color:#ccece6;
+    text-decoration:none;
+}
+ul.nav a:hover,
+ul.nav li.current a {
+    background:#086754;
+}
+.mb-3{
+  margin:10px;
+}
+#ut{
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  font-size: larger;
+}
+.container-fluid my-4 shadow{
+  background-image: none;
+}
+    
+
+  </style>
+
+
 <body>
+  <ul class="nav">
+    <li id="ut">Shopify</li>
+    <li><a href="/customerHome">Home</a></li>
+    <li><a href="/customerLogout">Logout</a></li>
+    <li>
+     
+        <a href="/receivedResponses">Received responses</a>
+      </li>
+      
+      <li>
+        <a href="/pastOrders">Past orders</a>
+      </li>
+      <li>
+
+        <a href="/unavailable">Unavailable items</a>
+
+    </li>
+    
+  </ul>
+
     
       <table class="table table-bordered border-primary">
         
@@ -56,7 +117,7 @@
             <td>{{re.quantity}}</td>
             <td>{{re.price}}</td>
             <td>{{re.date}}</td>
-            <td><div id="ap"><a href="" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Return</a>
+            <td><div id="ap"><a href="" class="btn btn-danger">Return</a>
 </div></td>
           </tr>
         
@@ -78,7 +139,7 @@
 <p>Date: {{re.date}}</p>
 <a href="" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Return</a> {% endcomment %}
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+{% comment %} <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -99,7 +160,9 @@
             </div>
         </div>
     </div>
-</div>
+</div> {% endcomment %}
 {% comment %} {%empty%}
     <h2>Nothing to show</h2> {% endcomment %}
-{% endfor %} {% endblock content %}
+{% endfor %} 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

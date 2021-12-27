@@ -62,20 +62,20 @@ ul.nav li.current a {
 <body>
   <ul class="nav">
     <li id="ut">Shopify</li>
-    <li><a href="#">Home</a></li>
+    <li><a href="/customerHome">Home</a></li>
     <li><a href="/customerLogout">Logout</a></li>
     <li>
-      <div class="mb-3">
-        <a href="/receivedResponses" class="btn btn-primary">Received responses</a>
-      </div></li>
       
-      <li><div class="mb-3">
-        <a href="/pastOrders" class="btn btn-primary">Past orders</a>
-      </div></li>
+        <a href="/receivedResponses">Received responses</a>
+      
+      
       <li>
-      <div class="mb-3">
-        <a href="/unavailable" class="btn btn-primary">Unavailable items</a>
-      </div>
+        <a href="/pastOrders">Past orders</a>
+     </li>
+      <li>
+      
+        <a href="/unavailable">Unavailable items</a>
+     
     </li>
     
   </ul>
@@ -178,8 +178,6 @@ ul.nav li.current a {
                 : {{ shop.name }}</p>
               <p class="card-text" style="margin-bottom: 10px; color: black;">Email Address
                 : {{ shop.email }}</p>
-              <p class="card-text" style="margin-bottom: 10px; color: black;">Address of the Shop
-                : {{ shop.address }}</p>
             </div>
           </button>
           <a href="{{shop.id}}/enterShop" class="btn btn-primary">Enter shop</a>

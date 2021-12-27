@@ -248,7 +248,7 @@ def submitComments(request, id):
 
 def shopComments(request, id):
     shop = Shopkeeper.objects.get(id=id)
-    comments = Comments.objects.filter(shop=shop)
+    comments = Comments.objects.filter(shop=shop, item=None)
     return render(request, "shopComments.html", {"comments": comments})
 
 # For submitting review about an item by customer
